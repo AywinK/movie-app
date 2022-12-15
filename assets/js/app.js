@@ -17,7 +17,7 @@ function displayMatches(matches) {
     
         </div>
     `);
-    console.log(matchObj.image_url);
+        console.log(matchObj.image_url);
     }
 }
 
@@ -35,9 +35,37 @@ function getMovieData(event) {
                 matches.push(movie);
             }
         }
-        console.log(matches);
-        displayMatches(matches);
+
+        var responsePromise = fetch("https://www.omdbapi.com/?apikey=fac4214b&t=drive");
+        console.log(responsePromise);
+
+        function handleResponse(responseObj) {
+            return responseObj.json();
+        }
+
+
+        responsePromise
+            .then(handleResponse)
+            .then(function (data) {
+                console.log(data);
+            });
+
+        // responsePromise.then(function(responseObj) {
+        //     console.log(responseObj);
+        //     var dataPromise = responseObj.json();
+
+        //     dataPromise.then(function(data) {
+        //         console.log(data);
+        //     });
     }
+    // .then(function (responseObj) {
+
+    //     var dataPromise = responseObj.json();
+    //     console.log(responseObj);
+    // });
+    console.log(matches);
+    displayMatches(matches);
+
 
 }
 
